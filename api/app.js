@@ -1,10 +1,18 @@
+const path = require('path');
 const express = require('express');
 const app = express();
+
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/.well-known', express.static('.well-known'));
+
+// ✅ Serve assetlinks.json properly (dotfiles allowed + correct MIME)
+app.use('/.well-known', express.static(path.join(__dirname, '..', '.well-known'), {
+  dotfiles: 'allow',
+  setHeaders: (res) => res.type('application/json'),
+}));
 
 // Routes;
 app.get('/', (req, res) => {
