@@ -25,6 +25,10 @@ app.get('/list', (req, res) => {
   res.status(200).json({ message: `Received listId: ${listId}` });
 });
 
+app.get('/recipe', (req, res) => {
+  const listId = req.query.recipeId;
+  res.status(200).json({ message: `Received recipeId: ${listId}` });
+});
 // ❌ DO NOT app.listen() on Vercel
 // ✅ Export the Express app instead
 module.exports = app;
